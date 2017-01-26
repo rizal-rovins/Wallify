@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Wallify</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="banner_ads">ca-app-pub-3690357492073975/3382226844</string>
+    <string name="inter_ads">ca-app-pub-3690357492073975/6227628444</string>
+</resources>

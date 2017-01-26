@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all"
+        android:title="Fresh"
+        android:orderInCategory="0"
+        ></item>
+    <item
+        android:id="@+id/top"
+        android:title="Top Rated"
+        android:orderInCategory="0"
+        ></item>
+    <item
+        android:id="@+id/old"
+        android:title="Oldest First"
+        android:orderInCategory="1"
+        ></item>
+
+    <item
+
+            android:id="@+id/nature"
+            android:title="Nature and Landscape"
+            android:orderInCategory="2">
+    </item>
+        <item
+            android:title="Minimal"
+            android:orderInCategory="3"
+            android:id="@+id/minimal"
+            ></item>
+    <item
+        android:title="Cars"
+        android:id="@+id/cars"
+        android:orderInCategory="4">
+    </item>
+
+    <item
+        android:title="Artwork"
+        android:id="@+id/artwork"
+        android:orderInCategory="5">
+
+    </item>
+    <item
+        android:title="Abstract"
+        android:id="@+id/Abstract"
+        android:orderInCategory="6">
+    </item>
+    <item
+         android:title="And More.."
+            android:id="@+id/more"
+            android:orderInCategory="7">
+        </item>
+
+    </menu>
+

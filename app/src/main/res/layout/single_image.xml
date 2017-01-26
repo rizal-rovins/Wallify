@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/single_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#212121"
+                tools:context="ar.wallify.com.wallify_new_way.SingleImageActivity">
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ads">
+    </com.google.android.gms.ads.AdView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl"
+        android:layout_above="@id/adView2">
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2"
+        android:layout_weight="1"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:id="@+id/imageView"/>
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+        <android.support.design.widget.FloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_add_circle_outline_black_48dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="16dp"
+            app:backgroundTint="#EEEEEE"
+            android:id="@+id/button"
+            app:fabSize="normal"
+            android:elevation="8dp"
+            app:pressedTranslationZ="12dp"
+            app:rippleColor="@color/colorAccent"/>
+        <android.support.design.widget.FloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_file_download_black_48dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="100dp"
+            app:backgroundTint="#EEEEEE"
+            android:id="@+id/button1"
+            android:visibility="invisible"
+            app:fabSize="normal"
+            app:pressedTranslationZ="12dp"/>
+        <android.support.design.widget.FloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:backgroundTint="#EEEEEE"
+            android:src="@drawable/ic_image_black_48dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="175dp"
+            android:visibility="invisible"
+            android:id="@+id/button2"
+            app:fabSize="normal"
+            app:pressedTranslationZ="12dp"/>
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+            <android.support.design.widget.FloatingActionButton
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:backgroundTint="#EEEEEE"
+                android:src="@drawable/ic_favorite_border_black_48dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="250dp"
+                android:visibility="invisible"
+                android:id="@+id/button3"
+                app:fabSize="normal"
+                app:pressedTranslationZ="12dp"/>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
