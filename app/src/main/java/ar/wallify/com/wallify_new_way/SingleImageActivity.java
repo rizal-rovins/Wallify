@@ -18,11 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -55,7 +49,6 @@ public class SingleImageActivity extends AppCompatActivity
     Animation fabOpen,fabClose,fabRCw,fabRCCw;
     Boolean isOpen=false;
     Boolean flagIsCanccelled=false;
-    final InterstitialAd mInterstitialAd = new InterstitialAd(this);
     String halfDUrl,halfTUrl;
     public Boolean isRated=false;
 
@@ -87,25 +80,6 @@ public class SingleImageActivity extends AppCompatActivity
         final DatabaseReference database= FirebaseDatabase.getInstance().getReference();
         //////////////////////////////////////////////////////////////////////////////////
 
-        /////////////loading ads//////////////
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3690357492073975~7952027242");
-        AdView mAdView = (AdView) findViewById(R.id.adView2);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        mInterstitialAd.setAdUnitId("ca-app-pub-3690357492073975/6227628444");
-
-
-        mInterstitialAd.loadAd(adRequest);
-
-        /*if(Integer.parseInt(extras.getString("key"))%3==0)
-        mInterstitialAd.setAdListener(new AdListener(){
-            public void onAdLoaded(){
-                mInterstitialAd.show();
-            }
-        });**/
-        //////////////////////////////////
-
 
         fab_download=(FloatingActionButton)findViewById(R.id.button1);
         fab_save=(FloatingActionButton)findViewById(R.id.button2);
@@ -135,19 +109,6 @@ public class SingleImageActivity extends AppCompatActivity
         });
 
 
-
-
-
-
-
-        //String url =value;
-
-        //url = url.replace("_thumbs", "_thumbs2");
-
-
-
-        //USED fit() to load images efficiently
-        //USED centerCrop() to maintain aspect ratio
 
        Picasso.with(this).load(halfTUrl).centerCrop().fit().error(R.drawable.bi).into(imageView, new Callback()
         {
@@ -369,12 +330,6 @@ public class SingleImageActivity extends AppCompatActivity
             protected void onPreExecute()
             {
                 super.onPreExecute();
-                // take CPU lock to prevent CPU from going off if the user
-                // presses the power button during download
-                //PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                //mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                  //      getClass().getName());
-                //mWakeLock.acquire();
                 mProgressDialog.show();
 
 

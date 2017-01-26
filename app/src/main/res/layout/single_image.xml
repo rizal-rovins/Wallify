@@ -8,22 +8,13 @@
                 android:layout_height="match_parent"
                 android:background="#212121"
                 tools:context="ar.wallify.com.wallify_new_way.SingleImageActivity">
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
 
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ads">
-    </com.google.android.gms.ads.AdView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rl"
-        android:layout_above="@id/adView2">
+        >
 
 
     <ProgressBar

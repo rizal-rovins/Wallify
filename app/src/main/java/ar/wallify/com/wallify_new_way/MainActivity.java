@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,10 +26,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +39,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.Iterator;
 
 
@@ -79,23 +75,14 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.show();
-    //////////SETTING UP ADVIEW//////////////////////////////////
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3690357492073975~7952027242");
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-
-        mAdView = (AdView) findViewById(R.id.adView);
-        mAdView.loadAd(adRequest);
 
         ////////////////////////////FIREBASE///////////////////////////
 
 
 
         final DatabaseReference database=FirebaseDatabase.getInstance().getReference();
-        //for(int i=1;i<=388;i++)
-        //database.child(String.valueOf(i)).child("rate").setValue(0);
-        // final DatabaseReference myRef = database.child("1");
+
         database.child("rates").orderByChild("iRate").addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
@@ -217,7 +204,6 @@ public class MainActivity extends AppCompatActivity
                         return true;
                     }
                 });
-        ;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -450,7 +436,7 @@ public class MainActivity extends AppCompatActivity
                 {
 
                 }
-                Log.e("kutta", jsonStr);
+
 
             }
 
