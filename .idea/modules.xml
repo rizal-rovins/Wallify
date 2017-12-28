@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Wallify_New_Way.iml" filepath="$PROJECT_DIR$/Wallify_New_Way.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Wallify.iml" filepath="$PROJECT_DIR$/.idea/Wallify.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-2.5.2/picasso-2.5.2.iml" filepath="$PROJECT_DIR$/picasso-2.5.2/picasso-2.5.2.iml" />
     </modules>

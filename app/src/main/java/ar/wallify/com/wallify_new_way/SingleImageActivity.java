@@ -1,3 +1,4 @@
+
 package ar.wallify.com.wallify_new_way;
 
 import android.app.ProgressDialog;
@@ -274,19 +275,19 @@ public class SingleImageActivity extends AppCompatActivity
                     /*if (Environment.getExternalStorageState() == null)
                        output = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Wallify/"+filename+".jpg");
                     else*/
-                    File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"/" +"Wallify"+"/");
+                    File dir = new File(Environment.getExternalStorageDirectory().toString(),"Wallify");
                     if(!dir.exists())
                     {
-                        dir.mkdirs();
+                       dir.mkdirs();
 
                     }
 
                     //File dir = new File(Environment.getExternalStoragePublicDirectory( Environment.DIRECTORY_DOWNLOADS). getAbsoluteFile() + "/Walify");
-                    output = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() +"/" +"Wallify"+"/"+filename+".jpg");
+                    output = new FileOutputStream(dir.toString()+"/"+filename+".jpg");
                     Log.d("file path",String.valueOf(output));
 
 
-                    byte data[] = new byte[4096];
+                    byte data[] = new byte[1024];
                     long total = 0;
                     int count;
                     while ((count = input.read(data)) != -1)
@@ -378,8 +379,9 @@ public class SingleImageActivity extends AppCompatActivity
                     });
 
 
+
                     Toast.makeText(context, "Download error!", Toast.LENGTH_LONG).show();
-                    boolean deleted = file.delete();
+                    file.delete();
                 }
                 else
                 {

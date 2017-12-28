@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -24,21 +25,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Iterator;
 
 
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity
 {
     ParmetersForAsync para;
 
-    private AdView mAdView;
     private int category=0;
     Integer number_of_images;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     String list_rev[];
     String arr[];
     String top_rated [];
-
+    final int REQUEST_WRITE_STORAGE = 112;
 
 
 
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         final ProgressDialog mProgressDialog = new ProgressDialog(MainActivity.this,R.style.MyDialogTheme);
         mProgressDialog.setMessage("Loading");
         mProgressDialog.setCancelable(false);
@@ -121,7 +120,6 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout.addDrawerListener(mToggle);
         mDrawerLayout.bringToFront();
         mToggle.syncState();
-        //navList=(ListView)findViewById(R.id.)
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout.requestLayout();
         navigationView.setNavigationItemSelectedListener(
@@ -159,14 +157,14 @@ public class MainActivity extends AppCompatActivity
                                     category = 1;
                                     arr = null;
                                     MainActivity.this.setTitle("Nature And Landcsape");
-                                    para = new ParmetersForAsync(MainActivity.this, "http://wallifiles.coolpage.biz/jsondata/nature.json");
+                                    para = new ParmetersForAsync(MainActivity.this, "https://github.com/rizal-rovins/Wallify/raw/master/jsondata/nature.json");
                                     new getJsonCategory().execute(para);
                                     break;
                                 case R.id.minimal:
                                     category = 2;
                                     arr = null;
                                     MainActivity.this.setTitle("Minimal");
-                                    para = new ParmetersForAsync(MainActivity.this, "http://wallifiles.coolpage.biz/jsondata/minimal.json");
+                                    para = new ParmetersForAsync(MainActivity.this, "https://github.com/rizal-rovins/Wallify/raw/master/jsondata/minimal.json");
                                     new getJsonCategory().execute(para);
                                     break;
 
@@ -174,26 +172,38 @@ public class MainActivity extends AppCompatActivity
                                     category = 3;
                                     arr = null;
                                     MainActivity.this.setTitle("Cars");
-                                    para = new ParmetersForAsync(MainActivity.this, "http://wallifiles.coolpage.biz/jsondata/cars.json");
+                                    para = new ParmetersForAsync(MainActivity.this, "https://github.com/rizal-rovins/Wallify/raw/master/jsondata/cars.json");
                                     new getJsonCategory().execute(para);
                                     break;
                                 case R.id.artwork:
                                     category = 3;
                                     arr = null;
                                     MainActivity.this.setTitle("Artwork");
-                                    para = new ParmetersForAsync(MainActivity.this, "http://wallifiles.coolpage.biz/jsondata/artwork.json");
+                                    para = new ParmetersForAsync(MainActivity.this, "https://github.com/rizal-rovins/Wallify/raw/master/jsondata/artwork.json");
                                     new getJsonCategory().execute(para);
                                     break;
                                 case R.id.Abstract:
                                     category = 3;
                                     arr = null;
                                     MainActivity.this.setTitle("Abstract");
-                                    para = new ParmetersForAsync(MainActivity.this, "http://wallifiles.coolpage.biz/jsondata/abstract.json");
+                                    para = new ParmetersForAsync(MainActivity.this, "https://github.com/rizal-rovins/Wallify/raw/master/jsondata/abstract.json");
                                     new getJsonCategory().execute(para);
                                     break;
 
                                 case R.id.more:
-                                    Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+                                    Uri uri = Uri.parse("market://details?id=" + "ark.lwp.minimalfree");
+                                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                                    // To count with Play market backstack, After pressing back button,
+                                    // to taken back to our application, we need to add following flags to intent.
+                                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                    try {
+                                        startActivity(goToMarket);
+                                    } catch (ActivityNotFoundException e) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                                Uri.parse("http://play.google.com/store/apps/details?id=" +"ark.lwp.minimalfree")));
+                                    }
                                     break;
 
                             }
@@ -212,7 +222,7 @@ public class MainActivity extends AppCompatActivity
 
         //Asking for permissions
 
-        final int REQUEST_WRITE_STORAGE = 112;
+
         {
             boolean hasPermission = (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
@@ -225,6 +235,8 @@ public class MainActivity extends AppCompatActivity
                 }
         }
 
+
+
         class getJson extends AsyncTask<MainActivity, Void, String>
         {
             private String jsonStr;
@@ -236,7 +248,8 @@ public class MainActivity extends AppCompatActivity
                 activity = params[0];
 
                 HttpHandler sh = new HttpHandler();
-                jsonStr = sh.makeServiceCall("http://wallifiles.coolpage.biz/jsondata/data.json");
+                jsonStr = sh.makeServiceCall("https://raw.githubusercontent.com/rizal-rovins/Wallify/master/jsondata/data.json");
+                //"https://api.myjson.com/bins/15f4dn");
                 Integer number = new Integer(0);
                     if (jsonStr != null)
                     {
@@ -463,6 +476,29 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        boolean writeAccepted = false;
+        switch(requestCode){
+            case REQUEST_WRITE_STORAGE:
+                writeAccepted = grantResults[0]==PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if(writeAccepted){
+            String state = Environment.getExternalStorageState();
+            if (Environment.MEDIA_MOUNTED.equals(state)) {
+                File dir = new File(Environment.getExternalStorageDirectory().toString(),"Wallify");
+                boolean b = dir.mkdirs();
+                if(b){
+                    Log.i("TAG", "WOW! "+dir+" created!");
+                }else{
+                    Log.e("TAG", "OPS! "+dir+" NOT created! To be sure: new dir exist? "+dir.exists());
+                }
+            }
+        }
     }
 
 }

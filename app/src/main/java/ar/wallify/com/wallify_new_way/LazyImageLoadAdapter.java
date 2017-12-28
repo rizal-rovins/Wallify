@@ -93,7 +93,7 @@ public class LazyImageLoadAdapter extends BaseAdapter implements OnClickListener
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int heightPixels = metrics.heightPixels;
-        holder.image.setMinimumHeight(heightPixels/2);
+        holder.image.setMinimumHeight(heightPixels/3);
         holder.p.setVisibility(View.VISIBLE);
 
         Picasso.with(activity).load(DnTUrls.halfUrl_thumbs+data[position]+".jpg").fit().centerCrop().error(R.drawable.bi).into(holder.image, new Callback()
